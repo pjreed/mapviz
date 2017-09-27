@@ -39,7 +39,7 @@
 #include <boost/shared_ptr.hpp>
 
 // QT libraries
-#include <QOpenGLFunctions>
+#include <QOpenGLFunctions_3_2_Compatibility>
 #include <QOpenGLWidget>
 #include <QMouseEvent>
 #include <QWheelEvent>
@@ -55,7 +55,7 @@
 
 namespace mapviz
 {
-  class MapCanvas : public QOpenGLWidget, protected QOpenGLFunctions
+  class MapCanvas : public QOpenGLWidget, protected QOpenGLFunctions_3_2_Compatibility
   {
     Q_OBJECT
 
