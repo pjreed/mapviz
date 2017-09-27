@@ -44,7 +44,7 @@ catkin_package(
 
 include_directories(include
     ${catkin_INCLUDE_DIRS}
-    ${OpenCV_INCLUDE_DIR}
+    ${OpenCV_INCLUDE_DIRS}
 )
 
 # Build libtile_cache
@@ -58,6 +58,7 @@ add_library(${PROJECT_NAME} ${TILE_SRC_FILES})
 target_link_libraries(${PROJECT_NAME}
     ${catkin_LIBRARIES}
     ${Boost_LIBRARIES}
+    ${OpenCV_LIBS}
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets
