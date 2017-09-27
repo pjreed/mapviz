@@ -35,7 +35,7 @@
 
 // QT libraries
 #include <QDialog>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QPainter>
 #include <QPalette>
 
@@ -259,7 +259,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool OdometryPlugin::Initialize(QGLWidget* canvas)
+  bool OdometryPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
     SetColor(ui_.color->color());

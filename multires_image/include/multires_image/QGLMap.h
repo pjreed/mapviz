@@ -31,7 +31,7 @@
 #define MULTIRES_IMAGE_QGLMAP_H_
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QMouseEvent>
 #include <QWheelEvent>
 
@@ -45,7 +45,7 @@
 
 namespace multires_image
 {
-  class QGLMap : public QGLWidget
+  class QGLMap : public mapviz::MapCanvas
   {
     Q_OBJECT
 

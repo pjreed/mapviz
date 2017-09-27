@@ -33,7 +33,7 @@
 // Include mapviz_plugin.h first to ensure GL deps are included in the right order
 #include <mapviz/mapviz_plugin.h>
 
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QTimer>
 #include <mapviz/map_canvas.h>
 
@@ -60,7 +60,7 @@ namespace mapviz_plugins
     PointClickPublisherPlugin();
     virtual ~PointClickPublisherPlugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown() {}
 
     virtual void SetNode(const ros::NodeHandle& node);

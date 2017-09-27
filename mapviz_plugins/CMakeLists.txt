@@ -36,23 +36,9 @@ set(QT_LIBRARIES
   ${Qt5OpenGL_LIBRARIES}
   ${Qt5Widgets_LIBRARIES}
 )
-include_directories(
-  ${Qt5Core_INCLUDE_DIRS}
-  ${Qt5Gui_INCLUDE_DIRS}
-  ${Qt5OpenGL_INCLUDE_DIRS}
-  ${Qt5Widgets_INCLUDE_DIRS}
-)
-add_definitions(
-  ${Qt5Core_DEFINITIONS}
-  ${Qt5Gui_DEFINITIONS}
-  ${Qt5OpenGL_DEFINITIONS}
-  ${Qt5Widgets_DEFINITIONS}
-)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 find_package(OpenCV 3.1 COMPONENTS core imgproc REQUIRED)
-find_package(GLU REQUIRED)
-find_package(GLUT REQUIRED)
 
 catkin_package(
   INCLUDE_DIRS include
@@ -149,11 +135,11 @@ add_library(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     ${catkin_LIBRARIES}
-    ${GLU_LIBRARY}
-    ${GLUT_LIBRARY}
     ${OpenCV_LIBS}
-    ${QT_LIBRARIES}
-    ${QT_QTOPENGL_LIBRARIES}
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
+    Qt5::OpenGL
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-std=c++11 -D__STDC_FORMAT_MACROS")
 

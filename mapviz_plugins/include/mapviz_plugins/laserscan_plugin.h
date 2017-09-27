@@ -38,7 +38,7 @@
 #include <mapviz/mapviz_plugin.h>
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QColor>
 
 // ROS libraries
@@ -66,7 +66,7 @@ namespace mapviz_plugins
       LaserScanPlugin();
       virtual ~LaserScanPlugin();
 
-      bool Initialize(QGLWidget* canvas);
+      bool Initialize(mapviz::MapCanvas* canvas);
       void Shutdown()
       {
       }

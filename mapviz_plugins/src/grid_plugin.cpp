@@ -34,7 +34,7 @@
 #include <vector>
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QPalette>
 
 #include <mapviz/select_frame_dialog.h>
@@ -227,7 +227,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool GridPlugin::Initialize(QGLWidget* canvas)
+  bool GridPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
 

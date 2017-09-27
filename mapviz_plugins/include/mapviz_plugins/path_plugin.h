@@ -37,7 +37,7 @@
 #include <mapviz/mapviz_plugin.h>
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QObject>
 #include <QWidget>
 
@@ -62,7 +62,7 @@ namespace mapviz_plugins
     PathPlugin();
     virtual ~PathPlugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown()
     {
     }

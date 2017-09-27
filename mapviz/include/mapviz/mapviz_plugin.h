@@ -36,11 +36,9 @@
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include <GL/glew.h>
-
 // QT libraries
 #include <QWidget>
-#include <QGLWidget>
+#include <QOpenGLWidget>
 #include <QObject>
 
 // ROS libraries
@@ -56,6 +54,8 @@
 
 namespace mapviz
 {
+  class MapCanvas;
+
   class MapvizPlugin : public QObject
   {
     Q_OBJECT;
@@ -65,7 +65,7 @@ namespace mapviz
 
     virtual bool Initialize(
         boost::shared_ptr<tf::TransformListener> tf_listener,
-        QGLWidget* canvas)
+        MapCanvas* canvas)
     {
       tf_ = tf_listener;
       tf_manager_.Initialize(tf_);
@@ -289,7 +289,7 @@ namespace mapviz
     bool initialized_;
     bool visible_;
 
-    QGLWidget* canvas_;
+    MapCanvas* canvas_;
     IconWidget* icon_;
 
     ros::NodeHandle node_;
@@ -306,7 +306,7 @@ namespace mapviz
 
     int draw_order_;
 
-    virtual bool Initialize(QGLWidget* canvas) = 0;
+    virtual bool Initialize(MapCanvas* canvas) = 0;
 
     MapvizPlugin() :
       initialized_(false),

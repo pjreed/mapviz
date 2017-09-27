@@ -67,9 +67,9 @@ namespace mapviz_plugins
     }
   }
 
-  bool PointClickPublisherPlugin::Initialize(QGLWidget* canvas)
+  bool PointClickPublisherPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
-    canvas_ = static_cast<mapviz::MapCanvas*>(canvas);
+    canvas_ = canvas;
     canvas_->installEventFilter(&click_filter_);
 
     PrintInfo("Ready.");

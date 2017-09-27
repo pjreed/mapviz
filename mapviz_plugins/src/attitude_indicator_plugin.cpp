@@ -33,10 +33,12 @@
 #include <cstdio>
 #include <vector>
 
+#include <GL/glut.h>
+
 // QT libraries
 #include <QDebug>
 #include <QDialog>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 
 // ROS libraries
 #include <ros/master.h>
@@ -243,7 +245,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool AttitudeIndicatorPlugin::Initialize(QGLWidget* canvas)
+  bool AttitudeIndicatorPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     initialized_ = true;
     canvas_ = canvas;

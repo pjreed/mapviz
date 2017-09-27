@@ -1304,8 +1304,8 @@ void Mapviz::ToggleRecord(bool on)
       
       ROS_INFO("Writing video to: %s", filename.c_str());
       ui_.statusbar->showMessage("Recording video to " + QString::fromStdString(filename));
-      
-      canvas_->updateGL();
+
+      //canvas_->updateGL();
     }
     
     record_timer_.start(1000.0 / 30.0);

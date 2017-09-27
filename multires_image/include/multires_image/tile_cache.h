@@ -40,7 +40,7 @@
 #include <QObject>
 #include <QThread>
 #include <QMutex>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 
 #include <tf/transform_datatypes.h>
 
@@ -54,7 +54,7 @@ namespace multires_image
   Q_OBJECT
 
   public:
-    TileCache(TileSet* tileSet, QGLWidget* widget);
+    TileCache(TileSet* tileSet, mapviz::MapCanvas* widget);
     ~TileCache(void);
 
     void Load(Tile* tile);
@@ -76,7 +76,7 @@ namespace multires_image
 
   private:
     TileSet*                  m_tileSet;
-    QGLWidget*                m_widget;
+    mapviz::MapCanvas*        m_widget;
     int32_t                   m_currentLayer;
     tf::Point                 m_currentPosition;
     bool                      m_exit;

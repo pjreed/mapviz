@@ -34,12 +34,13 @@
 
 // QT libraries
 #include <QFileDialog>
-#include <QGLWidget>
 #include <QPalette>
 
 // ROS libraries
 #include <ros/ros.h>
 #include <tf/transform_datatypes.h>
+
+#include <mapviz/map_canvas.h>
 
 // Declare plugin
 #include <pluginlib/class_list_macros.h>
@@ -178,7 +179,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool MultiresImagePlugin::Initialize(QGLWidget* canvas)
+  bool MultiresImagePlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
 

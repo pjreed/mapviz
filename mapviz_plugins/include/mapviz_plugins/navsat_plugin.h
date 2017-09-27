@@ -29,7 +29,7 @@
 #include <vector>
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QObject>
 #include <QWidget>
 
@@ -52,7 +52,7 @@ namespace mapviz_plugins
     NavSatPlugin();
     virtual ~NavSatPlugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown()
     {
     }

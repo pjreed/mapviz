@@ -33,7 +33,6 @@
 #include <tile_map/wmts_source.h>
 
 // QT libraries
-#include <QGLWidget>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QPalette>
@@ -44,6 +43,8 @@
 
 #include <swri_transform_util/frames.h>
 #include <swri_yaml_util/yaml_util.h>
+
+#include <mapviz/map_canvas.h>
 
 // Declare plugin
 #include <pluginlib/class_list_macros.h>
@@ -280,7 +281,7 @@ namespace tile_map
     return config_widget_;
   }
 
-  bool TileMapPlugin::Initialize(QGLWidget* canvas)
+  bool TileMapPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
 

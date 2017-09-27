@@ -36,7 +36,7 @@
 
 // QT libraries
 #include <QDialog>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 
 // ROS libraries
 #include <ros/master.h>
@@ -310,7 +310,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool DisparityPlugin::Initialize(QGLWidget* canvas)
+  bool DisparityPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
 

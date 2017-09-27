@@ -36,7 +36,7 @@
 // QT libraries
 #include <QDateTime>
 #include <QDialog>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPalette>
@@ -212,9 +212,9 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool PlanRoutePlugin::Initialize(QGLWidget* canvas)
+  bool PlanRoutePlugin::Initialize(mapviz::MapCanvas* canvas)
   {
-    map_canvas_ = static_cast<mapviz::MapCanvas*>(canvas);
+    map_canvas_ = canvas;
     map_canvas_->installEventFilter(this);
 
     retry_timer_ = node_.createTimer(ros::Duration(1), &PlanRoutePlugin::Retry, this);

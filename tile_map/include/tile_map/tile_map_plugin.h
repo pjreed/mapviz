@@ -42,7 +42,6 @@
 #include <mapviz/mapviz_plugin.h>
 
 // QT libraries
-#include <QGLWidget>
 #include <QObject>
 #include <QWidget>
 
@@ -64,7 +63,7 @@ namespace tile_map
     TileMapPlugin();
     virtual ~TileMapPlugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown() {}
 
     void Draw(double x, double y, double scale);

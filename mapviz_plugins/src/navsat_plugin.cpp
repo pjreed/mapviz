@@ -25,7 +25,7 @@
 
 // QT libraries
 #include <QDialog>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QPalette>
 
 #include <opencv2/core/core.hpp>
@@ -211,7 +211,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool NavSatPlugin::Initialize(QGLWidget* canvas)
+  bool NavSatPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
     SetColor(ui_.color->color());

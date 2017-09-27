@@ -92,7 +92,7 @@ namespace mapviz_plugins
   {
   }
 
-  bool StringPlugin::Initialize(QGLWidget* canvas)
+  bool StringPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
     return true;

@@ -37,7 +37,7 @@
 #include <mapviz/mapviz_plugin.h>
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QObject>
 #include <QWidget>
 #include <QColor>
@@ -79,7 +79,7 @@ namespace mapviz_plugins
     ImagePlugin();
     virtual ~ImagePlugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown() {}
 
     void Draw(double x, double y, double scale);

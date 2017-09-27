@@ -38,7 +38,7 @@
 #include <mapviz/mapviz_plugin.h>
 #include <mapviz_plugins/point_drawing_plugin.h>
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QObject>
 #include <QWidget>
 
@@ -62,7 +62,7 @@ namespace mapviz_plugins
     OdometryPlugin();
     virtual ~OdometryPlugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown()
     {
     }

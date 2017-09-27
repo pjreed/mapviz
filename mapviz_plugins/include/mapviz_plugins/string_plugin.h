@@ -39,7 +39,7 @@
 #include <QString>
 #include <QColor>
 #include <QWidget>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QPainter>
 #include <QFont>
 #include <QStaticText>
@@ -78,7 +78,7 @@ namespace mapviz_plugins
     StringPlugin();
     virtual ~StringPlugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown() {}
 
     void Draw(double x, double y, double scale);

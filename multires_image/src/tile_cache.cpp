@@ -44,7 +44,7 @@
 
 namespace multires_image
 {
-  TileCache::TileCache(TileSet* tileSet, QGLWidget* widget) :
+  TileCache::TileCache(TileSet* tileSet, mapviz::MapCanvas* widget) :
     m_tileSet(tileSet),
     m_widget(widget),
     m_currentLayer(0),

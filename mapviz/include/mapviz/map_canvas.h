@@ -38,11 +38,9 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <GL/glew.h>
-#include <GL/gl.h>
-
 // QT libraries
-#include <QGLWidget>
+#include <QOpenGLFunctions>
+#include <QOpenGLWidget>
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QColor>
@@ -57,7 +55,7 @@
 
 namespace mapviz
 {
-  class MapCanvas : public QGLWidget
+  class MapCanvas : public QOpenGLWidget, protected QOpenGLFunctions
   {
     Q_OBJECT
 
@@ -244,6 +242,8 @@ namespace mapviz
     std::list<MapvizPluginPtr> plugins_;
 
     std::vector<uint8_t> capture_buffer_;
+
+    //QOpenGLContext* gl_context_;
   };
 }
 

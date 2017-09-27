@@ -35,7 +35,7 @@
 
 // QT libraries
 #include <QDialog>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 
 // ROS libraries
 #include <ros/master.h>
@@ -352,7 +352,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool ImagePlugin::Initialize(QGLWidget* canvas)
+  bool ImagePlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
 

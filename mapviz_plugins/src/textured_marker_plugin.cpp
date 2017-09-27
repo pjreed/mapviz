@@ -39,7 +39,7 @@
 
 // QT libraries
 #include <QDialog>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 
 // ROS libraries
 #include <ros/master.h>
@@ -448,7 +448,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool TexturedMarkerPlugin::Initialize(QGLWidget* canvas)
+  bool TexturedMarkerPlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
 

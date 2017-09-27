@@ -35,7 +35,7 @@
 #include <vector>
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QPalette>
 
 // ROS libraries
@@ -192,7 +192,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool TfFramePlugin::Initialize(QGLWidget* canvas)
+  bool TfFramePlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
 

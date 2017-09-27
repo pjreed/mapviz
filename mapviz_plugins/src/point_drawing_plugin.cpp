@@ -33,7 +33,7 @@
 #include <list>
 
 #include <QDialog>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QPalette>
 #include <QPainter>
 

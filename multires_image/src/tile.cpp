@@ -35,9 +35,11 @@
 #include <exception>
 #include <iostream>
 
+#include <mapviz/map_canvas.h>
+
 // QT libraries
-#include <QGLWidget>
 #include <QFile>
+#include <QGLWidget>
 
 #include <swri_math_util/math_util.h>
 
@@ -106,6 +108,7 @@ namespace multires_image
 
             m_memorySize = m_dimension * m_dimension * 4;
 
+            // TODO pjr Equivalent step for Qt 5?
             m_image = QGLWidget::convertToGLFormat(m_image);
           }
         }

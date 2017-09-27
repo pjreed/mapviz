@@ -35,10 +35,11 @@
 #include <vector>
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QPalette>
 #include <QImage>
 #include <QFileDialog>
+#include <QGLWidget>
 
 // ROS libraries
 #include <ros/master.h>
@@ -196,7 +197,7 @@ namespace mapviz_plugins
     return config_widget_;
   }
 
-  bool RobotImagePlugin::Initialize(QGLWidget* canvas)
+  bool RobotImagePlugin::Initialize(mapviz::MapCanvas* canvas)
   {
     canvas_ = canvas;
 
@@ -275,6 +276,7 @@ namespace mapviz_plugins
           image_ = image_.scaled(dimension_, dimension_, Qt::IgnoreAspectRatio, Qt::FastTransformation);
         }
 
+        // TODO pjr Any equivalent for QOpenGLWidget?
         image_ = QGLWidget::convertToGLFormat(image_);
 
         GLuint ids[1];

@@ -33,6 +33,8 @@
 #include <cmath>
 #include <swri_math_util/constants.h>
 
+#include <QMessageBox>
+
 namespace mapviz
 {
 bool compare_plugins(MapvizPluginPtr a, MapvizPluginPtr b)
@@ -41,7 +43,7 @@ bool compare_plugins(MapvizPluginPtr a, MapvizPluginPtr b)
 }
 
 MapCanvas::MapCanvas(QWidget* parent) :
-  QGLWidget(QGLFormat(QGL::SampleBuffers), parent),
+  QOpenGLWidget(parent),
   has_pixel_buffers_(false),
   pixel_buffer_size_(0),
   pixel_buffer_index_(0),
@@ -75,6 +77,10 @@ MapCanvas::MapCanvas(QWidget* parent) :
   scene_bottom_(-10)
 {
   ROS_INFO("View scale: %f meters/pixel", view_scale_);
+
+  //gl_context_ = new QOpenGLContext;
+  //gl_context_->create();
+
   setMouseTracking(true);
 
   transform_.setIdentity();
@@ -88,7 +94,7 @@ MapCanvas::~MapCanvas()
 {
   if(pixel_buffer_size_ != 0)
   {
-    glDeleteBuffersARB(2, pixel_buffer_ids_);
+    glDeleteBuffers(2, pixel_buffer_ids_);
   }
 }
 
@@ -107,15 +113,15 @@ void MapCanvas::InitializePixelBuffers()
     {
       if (pixel_buffer_size_ != 0)
       {
-        glDeleteBuffersARB(2, pixel_buffer_ids_);
+        glDeleteBuffers(2, pixel_buffer_ids_);
       }
 
-      glGenBuffersARB(2, pixel_buffer_ids_);
-      glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, pixel_buffer_ids_[0]);
-      glBufferDataARB(GL_PIXEL_PACK_BUFFER_ARB, buffer_size, 0, GL_STREAM_READ_ARB);
-      glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, pixel_buffer_ids_[1]);
-      glBufferDataARB(GL_PIXEL_PACK_BUFFER_ARB, buffer_size, 0, GL_STREAM_READ_ARB);
-      glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, 0);
+      glGenBuffers(2, pixel_buffer_ids_);
+      glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, pixel_buffer_ids_[0]);
+      glBufferData(GL_PIXEL_PACK_BUFFER_ARB, buffer_size, 0, GL_STREAM_READ_ARB);
+      glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, pixel_buffer_ids_[1]);
+      glBufferData(GL_PIXEL_PACK_BUFFER_ARB, buffer_size, 0, GL_STREAM_READ_ARB);
+      glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, 0);
 
       pixel_buffer_size_ = buffer_size;
     }
@@ -124,17 +130,12 @@ void MapCanvas::InitializePixelBuffers()
 
 void MapCanvas::initializeGL()
 {
-  GLenum err = glewInit();
-  if (GLEW_OK != err)
-  {
-    ROS_ERROR("Error: %s\n", glewGetErrorString(err));
-  }
-  else
-  {
-    // Check if pixel buffers are available for asynchronous capturing
-    std::string extensions = (const char*)glGetString(GL_EXTENSIONS);
-    has_pixel_buffers_ = extensions.find("GL_ARB_pixel_buffer_object") != std::string::npos;
-  }
+  initializeOpenGLFunctions();
+
+
+  // Check if pixel buffers are available for asynchronous capturing
+  std::string extensions = (const char*)glGetString(GL_EXTENSIONS);
+  has_pixel_buffers_ = extensions.find("GL_ARB_pixel_buffer_object") != std::string::npos;
 
   glClearColor(0.58f, 0.56f, 0.5f, 1);
   if (enable_antialiasing_)
@@ -184,19 +185,21 @@ void MapCanvas::CaptureFrame(bool force)
     pixel_buffer_index_ = (pixel_buffer_index_ + 1) % 2;
     int32_t next_index = (pixel_buffer_index_ + 1) % 2;
 
-    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, pixel_buffer_ids_[pixel_buffer_index_]);
+    glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, pixel_buffer_ids_[pixel_buffer_index_]);
     glReadPixels(0, 0, width(), height(), GL_BGRA, GL_UNSIGNED_BYTE, 0);
-    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, pixel_buffer_ids_[next_index]);
-    GLubyte* data = reinterpret_cast<GLubyte*>(glMapBufferARB(GL_PIXEL_PACK_BUFFER_ARB, GL_READ_ONLY_ARB));
+    glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, pixel_buffer_ids_[next_index]);
+    // TODO Fix frame capturing
+    //GLubyte* data = reinterpret_cast<GLubyte*>(glMapBuffer(GL_PIXEL_PACK_BUFFER_ARB, GL_READ_ONLY_ARB));
+    GLubyte* data = nullptr;
     if(data)
     {
       capture_buffer_.resize(pixel_buffer_size_);
 
       memcpy(&capture_buffer_[0], data, pixel_buffer_size_);
 
-      glUnmapBufferARB(GL_PIXEL_PACK_BUFFER_ARB);
+      //glUnmapBuffer(GL_PIXEL_PACK_BUFFER_ARB);
     }
-    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, 0);
+    glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, 0);
   }
   else
   {
@@ -424,11 +427,6 @@ void MapCanvas::ToggleRotate90(bool on)
 void MapCanvas::ToggleEnableAntialiasing(bool on)
 {
   enable_antialiasing_ = on;
-  QGLFormat format;
-  format.setSwapInterval(1);
-  format.setSampleBuffers(enable_antialiasing_);
-  // After setting the format, initializeGL will automatically be called again, then paintGL.
-  this->setFormat(format);
 }
 
 void MapCanvas::ToggleUseLatestTransforms(bool on)

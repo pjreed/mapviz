@@ -38,11 +38,9 @@
 #include <list>
 #include <vector>
 
-#include <GL/glut.h>
-
 // QT libraries
 #include <QColor>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QObject>
 #include <QWidget>
 
@@ -70,7 +68,7 @@ class AttitudeIndicatorPlugin : public mapviz::MapvizPlugin
   AttitudeIndicatorPlugin();
   virtual ~AttitudeIndicatorPlugin();
 
-  bool Initialize(QGLWidget* canvas);
+  bool Initialize(mapviz::MapCanvas* canvas);
   void Shutdown();
 
   void Draw(double x, double y, double scale);

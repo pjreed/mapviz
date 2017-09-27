@@ -39,7 +39,7 @@
 #include <mapviz/mapviz_plugin.h>
 
 // QT libraries
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QColor>
 #include <QMutex>
 
@@ -71,7 +71,7 @@ namespace mapviz_plugins
     PointCloud2Plugin();
     virtual ~PointCloud2Plugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown()
     {
     }

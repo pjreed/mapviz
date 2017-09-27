@@ -39,7 +39,7 @@
 
 // QT libraries
 #include <QColor>
-#include <QGLWidget>
+#include <mapviz/map_canvas.h>
 #include <QObject>
 #include <QWidget>
 
@@ -78,7 +78,7 @@ namespace mapviz_plugins
     DisparityPlugin();
     virtual ~DisparityPlugin();
 
-    bool Initialize(QGLWidget* canvas);
+    bool Initialize(mapviz::MapCanvas* canvas);
     void Shutdown() {}
 
     void Draw(double x, double y, double scale);
